@@ -22,8 +22,7 @@ public class UserDao {
 
     public boolean registerUser(User user) {
         boolean success = false;
-        try (Connection connection = dbDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO account (username, password, email, gender, contact_no, address, profile_pic, account_type, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO account (username, password, email, gender, contact_no, address, profile_pic, account_type, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
             preparedStatement.setString(1, user.getUsername().trim());
             preparedStatement.setString(2, user.getPassword().trim());
@@ -80,10 +79,9 @@ public class UserDao {
         return user;
     }
 
-    
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users"); ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account"); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
                 User user = new User(
@@ -109,7 +107,7 @@ public class UserDao {
 
     public boolean updateUser(User user) {
         boolean success = false;
-        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users SET password=?, email=?, gender=?, contact_no=?, address=?, profile_pic=?, account_type=?, status=? WHERE username=?")) {
+        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE account SET password=?, email=?, gender=?, contact_no=?, address=?, profile_pic=?, account_type=?, status=? WHERE username=?")) {
 
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getEmail());

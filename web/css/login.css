@@ -6,7 +6,8 @@
 }
 
 body {
-	background: #f6f5f7;
+        background-image: url('../img/loginbg.jpg');
+        background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -16,7 +17,9 @@ body {
 	margin: -20px 0 50px;
 }
 
-
+::-webkit-scrollbar{
+    display:none;
+}
 h1 {
 	font-weight: bold;
 	margin: 0;

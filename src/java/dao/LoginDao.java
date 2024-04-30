@@ -41,7 +41,30 @@ public class LoginDao {
         }
         return status;
     }
+    
+    public boolean storePassword(String username, String password){
+        boolean status = false;
+        try (Connection connection = dbDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE account SET password = ? WHERE username = ?")) {
 
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+
+            System.out.println(preparedStatement);
+            int rowAffected = preparedStatement.executeUpdate();
+            
+            if(rowAffected != 0){
+                return true;
+            }
+            
+        } catch (SQLException e) {
+            printSQLException(e);
+        } finally {
+            dbDao.closeConnection();
+        }
+        return status;
+    }
+    
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {

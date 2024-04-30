@@ -5,56 +5,80 @@
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>addUserServlet</servlet-name>
-        <servlet-class>controller.addUserServlet</servlet-class>
+        <servlet-name>forgotPasswordServlet</servlet-name>
+        <servlet-class>controller.forgotPasswordServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>delUserServlet</servlet-name>
-        <servlet-class>controller.delUserServlet</servlet-class>
+        <servlet-name>checkUsernameServlet</servlet-name>
+        <servlet-class>controller.checkUsernameServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>updateUserServlet</servlet-name>
-        <servlet-class>controller.updateUserServlet</servlet-class>
+        <servlet-name>UserManageServlet</servlet-name>
+        <servlet-class>controller.UserManageServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>listUserServlet</servlet-name>
-        <servlet-class>controller.listUserServlet</servlet-class>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>controller.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>registerServlet</servlet-name>
-        <servlet-class>controller.registerServlet</servlet-class>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>controller.TestServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>controller.NewServlet</servlet-class>
+        <servlet-name>displayUser</servlet-name>
+        <servlet-class>controller.displayUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>addUserServlet</servlet-name>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>forgotPasswordServlet</servlet-name>
+        <url-pattern>/forgotPasswordServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkUsernameServlet</servlet-name>
+        <url-pattern>/checkUsernameServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/UserManageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
         <url-pattern>/addUserServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>delUserServlet</servlet-name>
-        <url-pattern>/delUserServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>updateUserServlet</servlet-name>
-        <url-pattern>/updateUserServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>listUserServlet</servlet-name>
+        <servlet-name>UserManageServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>registerServlet</servlet-name>
-        <url-pattern>/registerServlet</url-pattern>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/updateUserServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/delUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/queryUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/TestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>displayUser</servlet-name>
+        <url-pattern>/displayUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

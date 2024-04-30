@@ -13,14 +13,15 @@ import model.User;
  * @author USER
  */
 public class UserService {
-    private UserDao userDAO = new UserDao();
+    UserDao userDAO = new UserDao();
     
     public List<User> listUser(){
         List<User> userList = userDAO.getAllUsers();
+        System.out.println("list user");
         return userList; 
     }
     
-    public User getUserByUserame(String username){
+    public User getUserByUsername(String username){
         User user = userDAO.getUserByUsername(username);
         return user;
     }

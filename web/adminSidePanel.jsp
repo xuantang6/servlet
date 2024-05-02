@@ -94,7 +94,7 @@
 
             <ul class="logout">
                 <li>
-                    <a href="#">
+                    <a href="signUpIn.jsp">
                         <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
                             Logout

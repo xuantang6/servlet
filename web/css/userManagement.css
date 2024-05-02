@@ -27,11 +27,10 @@ a{
 
 body{
     margin: 0px;
-    padding: 0px;
-    background-color: #6c757d;
+    padding: 0px;   
     overflow: hidden;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
 }
 
 .clearfix{
@@ -52,32 +51,6 @@ body{
     font-size: 46px;
 }
 
-.sidebar{
-    height: 100%;
-    width: 300px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #2d353c;
-    overflow: hidden;
-    transform: 0.5s;
-    padding-top: 5px;
-}
-.sidebar a{
-    padding: 15px 8px 15px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #8b8989;
-    display: block;
-    transform: 0.3s;
-
-}
-
-.sidebar a:hover{
-    color: rgb(240, 240, 240);
-    background-color: rgb(79, 76, 76);
-}
 
 #main{
     transition: margin-left .5s;
@@ -99,24 +72,7 @@ body{
     margin-bottom: 14px;
 }
 
-.profile p{
-    color: white;
-    font-weight: 500;
-    margin-left: 55px;
-    margin-top: 10px;
-    font-size: 18.5px ;
-}
-.profile p span{
-    font-weight: 400;
-    font-size: 12px;
-    display: block;
-    color: rgb(210, 209, 210);
-}
-.pro-img{
-    float: left;
-    width: 40px;
-    margin-top: 5px;
-}
+
 .nav2{
     display: none;
 }
@@ -190,7 +146,7 @@ body{
 
 .box-8, .box-4{
     width: 96.5%;
-    background-color:#2d353c ;
+    background-color:#212126 ;
     height: 90vh;
     border-radius: 5px;
     overflow:auto ;
@@ -217,60 +173,7 @@ td,th{
     border-bottom: 1px solid #818181;
 }
 
-.circle-wrap{
-    margin:50px auto;
-    width: 150px;
-    height: 150px;
-    background-color: rgb(73, 182, 214);
-    border-radius: 50%;
-}
 
-.circle-wrap .circle .mask ,
-.circle-wrap .circle .fill{
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    border-radius: 50%;
-}
-
-.circle-wrap .circle .mask{
-    clip: rect(0px,150px,150px,75px);
-}
-
-.circle-wrap .circle .mask .fill{
-    clip: rect(0px,75px,150px,0px);
-    background-color: rgb(36, 123, 204);
-}
-
-.circle-wrap .circle .mask.full,
-.circle-wrap .circle .fill{
-    animation: fill ease-in-out 3s;
-    transform: rotate(126deg);
-}
-
-@keyframes fill{
-    0%{
-        transform:rotate(0deg);
-    }
-
-    100%{
-        transform: rotate(126deg);
-    }
-}
-.circle-wrap .inside-circle{
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background-color: #fff;
-    line-height: 130px;
-    text-align: center;
-    margin-top: 10px;
-    margin-left: 10px;
-    position: absolute;
-    z-index: 100;
-    font-weight: 700;
-    font-size: 2em;
-}
 
 #g1{
     color: #8753de;
@@ -297,9 +200,23 @@ input{
 }
 
 .overflow-text {
-    max-width: 150px !important; /* 设置单元格的最大宽度，提高优先级 */
+    max-width: 150px !important; 
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
 }
     
+#alertContainer {
+    position: fixed;
+    width: 100%;
+  z-index: 9999 !important; 
+}
+
+.alert.fade {
+  transition: opacity 1s ease-out; 
+  opacity: 0; 
+}
+
+.alert.show {
+  opacity: 0.8; 
+}

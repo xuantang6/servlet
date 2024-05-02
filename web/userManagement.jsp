@@ -10,8 +10,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <title>JSP Page</title>
     </head>
-    <body style="background-color: grey" >
+    <body style="background-color: #999;" >
         <jsp:include page="adminSidePanel.jsp"/>
+            ${tips}
         <div id="main">
             <div class="head">  
                 <div class="col-div-6"></div>
@@ -70,7 +71,7 @@
 
                                             <td>
                                                 <button style="color: white" data-uname="${user.username}" data-bs-toggle="modal" data-bs-target="#updateBackdrop" class="btn btn-outline-primary editButton">Edit</button>
-                                                <button style="color: white" data-bs-toggle="modal" data-bs-target="#delBackdrop" class='btn btn-outline-danger btndel' onclick="setUsername('${user.username}')">Delete</button>
+                                                <button id="delBtn" style="color: white" data-bs-toggle="modal" data-bs-target="#delBackdrop" class='btn btn-outline-danger btndel' onclick="setUsername('${user.username}')">Delete</button>
 
                                             </td>
                                         </tr>
@@ -98,7 +99,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteUser()" >Delete</button>
+                        <button type="button" class="btn btn-danger delBtn" onclick="deleteUser()" >Delete</button>
                     </div>
                 </div>
             </div>
@@ -258,8 +259,28 @@
         <script src="js/userManagement.js" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
+ $('#staticBackdrop form').submit(function(event) {
+    // 遍历表单中的所有输入字段
+    var isValid = true;
+    $(this).find('input, select').each(function() {
+        // 检查是否有必填字段为空值
+        if ($(this).prop('required') && !$(this).val()) {
+            isValid = false;
+        }
+        // 检查是否有必选项未选择
+        if ($(this).is('select') && $(this).prop('required') && !$(this).val()) {
+            isValid = false;
+        }
+    });
 
-                            
+    // 如果有必填字段为空值或必选项未选择，则阻止表单提交
+    if (!isValid) {
+        event.preventDefault();
+        alert('Please fill in all required fields.');
+    }
+});
+
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 

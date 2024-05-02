@@ -41,10 +41,6 @@
         <url-pattern>/forgotPasswordServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>checkUsernameServlet</servlet-name>
-        <url-pattern>/checkUsernameServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>UserManageServlet</servlet-name>
         <url-pattern>/UserManageServlet</url-pattern>
     </servlet-mapping>
@@ -67,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>UserManageServlet</servlet-name>
         <url-pattern>/queryUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/checkUsernameServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>

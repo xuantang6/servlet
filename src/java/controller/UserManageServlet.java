@@ -16,6 +16,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.User;
 import services.LoginService;
@@ -81,9 +82,12 @@ public class UserManageServlet extends HttpServlet {
                     User user = new User(username, password, email, gender, contact, address, "profile_picture/" + fileName, userType, Boolean.parseBoolean(accStatus));
                     boolean b = userService.addUser(user);
 
-                    String tips = b ? "<label style= 'color:green'>new user added</label>" : "<label style= 'color:red'>Somethings went Wrong</label>";
+                    String tips = b ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
+                            + "        <strong>New users have been added!&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                            + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
+                            + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
                     request.setAttribute("tips", tips);
-                    request.getRequestDispatcher("registerResult.jsp").forward(request, response);
+                    request.getRequestDispatcher("listUserServlet").forward(request, response);
                 }
 
                 break;
@@ -97,12 +101,32 @@ public class UserManageServlet extends HttpServlet {
                 break;
                 
             case "/delUserServlet":
-                String uname = request.getParameter("uname");
-                boolean b = userService.deleteUser(uname);
-                String tips = b ? "<label style= 'color:green'>User has been deleted</label>" : "<label style= 'color:red'>Somethings went Wrong</label>";
-                request.setAttribute("tips",tips);
-                request.getRequestDispatcher("registerResult.jsp").forward(request,response);
-                System.out.println("hidelete");
+                HttpSession session = request.getSession();
+                User staff = (User) session.getAttribute("user");
+                if ("staff".equalsIgnoreCase(staff.getAccount_type())) {
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    
+                    Gson gson = new Gson();
+
+                    String jsonUser = gson.toJson(staff);
+                    System.out.println(staff);
+
+                    PrintWriter out = response.getWriter();
+                    out.print(jsonUser);
+                    out.flush();
+                } else {
+                    
+                    String uname = request.getParameter("uname");
+                    boolean b = userService.deleteUser(uname);
+                    String tips = b ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
+                            + "        <strong>"+uname+"</strong>!&nbsp; has been deleted!&nbsp; <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                            + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
+                            + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
+                    request.setAttribute("tips", tips);
+                    request.getRequestDispatcher("listUserServlet").forward(request, response);
+                    System.out.println("hi delete");
+                }
                 
                 break;
                 
@@ -119,7 +143,7 @@ public class UserManageServlet extends HttpServlet {
                 System.out.println(jsonUser);
 
                 PrintWriter out = response.getWriter();
-                out.print(jsonUser); // 将用户信息写入响应
+                out.print(jsonUser); 
                 out.flush();
 
                 System.out.println("Received username: " + uName); 
@@ -140,10 +164,28 @@ public class UserManageServlet extends HttpServlet {
                 User userUp = new User(usernameUp, passwordUp ,emailUp, genderUp, contactUp, addressUp, imgPath, userTypeUp, Boolean.parseBoolean(accStatusUp));
                 boolean bool = userService.updateUser(userUp);
                 
-                tips = bool ? "<label style= 'color:green'>User has been Updated</label>" : "<label style= 'color:red'>Somethings went Wrong</label>";
+                String tips = bool ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
+                        + "        <strong>User information has been updated!&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                        + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
+                        + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
                 request.setAttribute("tips", tips);
-                request.getRequestDispatcher("registerResult.jsp").forward(request, response);
+                request.getRequestDispatcher("listUserServlet").forward(request, response);
                 break;
+                
+                
+            case "/checkUsernameServlet":
+                String signUpUname = request.getParameter("signup-username");
+                
+                UserService uService = new UserService();
+                User checkUser = uService.getUserByUsername(signUpUname);
+
+                if (checkUser == null) {
+                    response.getWriter().write("Username exists");
+                }else{
+                     response.getWriter().write("Username does not exist");
+                }
+                break;
+                
                 
             default:
                 System.out.println("hi");

@@ -66,3 +66,73 @@ $(document).ready(function () {
         });
     });
 });
+
+
+var alertElement = document.getElementById('alertContainer');
+var closeButton = document.getElementById('closeButton');
+
+
+var timeoutDuration = 5000;
+
+setTimeout(function () {
+
+    alertElement.classList.add('fade');
+    alertElement.classList.remove('show');
+
+
+    setTimeout(function () {
+        alertElement.remove();
+    }, 1000);
+}, timeoutDuration);
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector('form');
+
+    form.addEventListener('input', function () {
+        const inputs = form.querySelectorAll('input');
+        const selects = form.querySelectorAll('select');
+        let disableSubmit = false;
+
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                disableSubmit = true;
+            }
+        });
+
+        selects.forEach(select => {
+            if (!select.value.trim() || select.value === 'Select Gender' || select.value === 'Select User Type' || select.value === 'Select Account Status') {
+                disableSubmit = true;
+            }
+        });
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = disableSubmit;
+    });
+});
+
+$(document).ready(function () {
+   
+    $(".btndel").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "delUserServlet",
+            success: function (response) {
+
+                if(response.account_type === 'staff'){
+                    $(".delBtn").removeAttr("onclick");
+                    alert("You don't have permission to delete users.");
+                    
+                    $(".delBtn").click(function () {
+                        alert("nono");
+                    });
+                }
+
+                
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+});

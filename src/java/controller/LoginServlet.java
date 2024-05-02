@@ -36,23 +36,6 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-//            String username = request.getParameter("signin-username");
-//            String password = request.getParameter("signin-password");
-//            LoginService loginService = new LoginService();
-//
-//            User user = loginService.loginUser(username, password);
-//
-//            if (user == null) {
-//                //login fail
-//                request.setAttribute("tips", "<label style= 'color:red'>wrong password or username</label>");
-//                request.getRequestDispatcher("signUpIn.jsp").forward(request, response);
-//            } else {
-//                HttpSession session = request.getSession();
-//                session.setAttribute("user", user);
-//                response.sendRedirect("loginSuccess.jsp");
-//
-//            }
-        
         String formAction = request.getServletPath();
         System.out.println(formAction);
         
@@ -66,12 +49,21 @@ public class LoginServlet extends HttpServlet {
 
             if (user == null) {
                 //login fail
-                request.setAttribute("tips", "<label style= 'color:red'>wrong password or username</label>");
+                request.setAttribute("tips", "<label id=\"errorMessage\" style= 'color:red'>Wrong username or password, please try again</label>");
                 request.getRequestDispatcher("signUpIn.jsp").forward(request, response);
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-                response.sendRedirect("loginSuccess.jsp");
+                
+                if(user.getAccount_type().equalsIgnoreCase("admin") || user.getAccount_type().equalsIgnoreCase("staff") ){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    response.sendRedirect("userManagement.jsp");
+                }else{
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    response.sendRedirect("loginSuccess.jsp");
+                }
+                
+                
 
             }
             

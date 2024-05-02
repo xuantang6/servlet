@@ -134,7 +134,7 @@ public class UserDao {
 
     public boolean deleteUser(String username) {
         boolean success = false;
-        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM users WHERE username=?")) {
+        try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM account WHERE username=?")) {
 
             preparedStatement.setString(1, username);
             int rowsDeleted = preparedStatement.executeUpdate();

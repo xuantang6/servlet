@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     background-image: url('../img/loginbg.jpg');
     background-size: cover;
@@ -333,3 +334,31 @@ input:focus {
     }
 }
 
+
+ .modal-sheet .modal-body ul li {
+  display: flex;
+  align-items: center; /* 垂直居中 */
+}
+
+.modal-sheet .modal-body ul li i {
+  margin-right: 10px; /* 可以根据需要调整图标与文本之间的间距 */
+}
+.fa-cart-shopping .fa-seedling .fa-tags{
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  font-size: 50px;
+}
+.fa-cart-shopping{
+  color: rgba(81, 177, 255, 0.915);
+  font-size: 50px;
+
+}
+.fa-seedling{
+  color: rgb(68, 211, 68);
+  font-size: 50px;
+
+}
+.fa-tags{
+  color: rgb(251, 71, 31);
+  font-size: 50px;
+}

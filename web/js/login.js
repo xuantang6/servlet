@@ -25,11 +25,25 @@ function togglePasswordVisibility(inputId) {
     }
 }
 
+document.getElementById("passwordInput1").addEventListener("blur", function () {
+    var password = this.value.trim();
+    var passwordWarning = document.getElementById("passwordWarning");
+
+    if (password === '') {
+        passwordWarning.textContent = "";
+    }
+});
+
 document.getElementById("passwordInput1").addEventListener("input", function () {
     var password = this.value;
     var passwordWarning = document.getElementById("passwordWarning");
 
     var validPassword = true;
+
+    if (password.trim() === '') {
+        passwordWarning.textContent = "";
+        return;
+    }
     if (password.length < 8) {
         validPassword = false;
         passwordWarning.textContent = "Password must be at least 8 characters long.";
@@ -52,6 +66,7 @@ document.getElementById("passwordInput1").addEventListener("input", function () 
         passwordWarning.style.display = "block";
     }
 });
+
 
 function togglePasswordVisibility(inputId) {
     var passwordInput = document.getElementById(inputId);
@@ -121,3 +136,8 @@ $(document).ready(function () {
         });
     });
 });
+
+window.history.forward();
+function noBack() {
+    window.history.forward();
+}

@@ -12,6 +12,16 @@
     </head>
     <body style="background-color: #999;" >
         <jsp:include page="adminSidePanel.jsp"/>
+        <%
+            String tips = (String) session.getAttribute("tips");
+            if (tips != null) {
+        %>
+        <%= tips%>
+        <%
+            }
+            session.removeAttribute("tips");
+        %>
+
             ${tips}
         <div id="main">
             <div class="head">  
@@ -82,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
+                
             </div>
         </div>
 

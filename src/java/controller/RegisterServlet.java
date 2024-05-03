@@ -31,14 +31,20 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("signup-username");
         String email = request.getParameter("email");
         String password = request.getParameter("signup-password");
+        
+        if(username != null && email != null && password != null){
+            User user = new User(username, password, email, "M", "", "", "", "Customer", true);
+            UserService userService = new UserService();
+            boolean b = userService.addUser(user);
 
-        User user = new User(username, password, email, "M", "", "", "", "Customer", true);
-        UserService userService = new UserService();
-        boolean b = userService.addUser(user);
+            String tips = b ? "<label style= 'color:green'>new user added</label>" : "<label style= 'color:red'>Somethings went Wrong</label>";
+            request.setAttribute("tips", tips);
+            request.getRequestDispatcher("registerResult.jsp").forward(request, response);
+        }else{
+            
+        }
 
-        String tips = b ? "<label style= 'color:green'>new user added</label>" : "<label style= 'color:red'>Somethings went Wrong</label>";
-        request.setAttribute("tips", tips);
-        request.getRequestDispatcher("registerResult.jsp").forward(request, response);
+        
     }
 
 }

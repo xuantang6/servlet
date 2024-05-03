@@ -101,9 +101,13 @@ public class UserManageServlet extends HttpServlet {
                 break;
                 
             case "/delUserServlet":
+                System.out.println("hi delete");
+                
                 HttpSession session = request.getSession();
                 User staff = (User) session.getAttribute("user");
-                if ("staff".equalsIgnoreCase(staff.getAccount_type())) {
+                System.out.println("hey"+staff);
+                if (staff != null && "staff".equalsIgnoreCase(staff.getAccount_type())) {
+                    
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
                     
@@ -115,17 +119,21 @@ public class UserManageServlet extends HttpServlet {
                     PrintWriter out = response.getWriter();
                     out.print(jsonUser);
                     out.flush();
-                } else {
-                    
+                } else{
+                    System.out.println("heyyyo del");
                     String uname = request.getParameter("uname");
+                    System.out.println("GET uname ="+uname);
                     boolean b = userService.deleteUser(uname);
                     String tips = b ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
-                            + "        <strong>"+uname+"</strong>!&nbsp; has been deleted!&nbsp; <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                            + "        <strong>"+uname+"</strong>&nbsp; has been deleted!&nbsp; <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
                             + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
                             + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
-                    request.setAttribute("tips", tips);
-                    request.getRequestDispatcher("listUserServlet").forward(request, response);
-                    System.out.println("hi delete");
+//                    request.setAttribute("tips", tips);
+//                    request.getRequestDispatcher("listUserServlet").forward(request, response);
+                    request.getSession().setAttribute("tips", tips);
+                    response.sendRedirect("listUserServlet");
+                    System.out.println("staff");
+                    //use session to pass error msg else cant redirect
                 }
                 
                 break;
@@ -165,11 +173,14 @@ public class UserManageServlet extends HttpServlet {
                 boolean bool = userService.updateUser(userUp);
                 
                 String tips = bool ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
-                        + "        <strong>User information has been updated!&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                        + "        <strong>User information has been updated&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
                         + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
                         + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
-                request.setAttribute("tips", tips);
-                request.getRequestDispatcher("listUserServlet").forward(request, response);
+//                request.setAttribute("tips", tips);
+//                request.getRequestDispatcher("listUserServlet").forward(request, response);
+                request.getSession().setAttribute("tips", tips);
+                response.sendRedirect("listUserServlet");
+
                 break;
                 
                 

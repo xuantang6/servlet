@@ -15,7 +15,7 @@
         <div class="area"></div><nav class="main-menu">
             <ul>
                 <li>
-                    <a href="userManagement.jsp">
+                    <a href="dashboard.jsp">
                         <i class="fa fa-home fa-2x"></i>
                         <span class="nav-text">
                             Dashboard

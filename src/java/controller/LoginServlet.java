@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
                 if(user.getAccount_type().equalsIgnoreCase("admin") || user.getAccount_type().equalsIgnoreCase("staff") ){
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
-                    response.sendRedirect("userManagement.jsp");
+                    response.sendRedirect("dashboard.jsp");
                 }else{
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);

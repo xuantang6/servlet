@@ -61,9 +61,9 @@ public class UserManageServlet extends HttpServlet {
                 String fileName = UUID.randomUUID().toString() + ext;
                 //get profile_picture dir
                 String dir = getServletContext().getRealPath("/") + "profile_picture";
-                System.out.println(dir);
+//                System.out.println(dir);
                 String savePath = dir + "\\" + fileName;
-                System.out.println(savePath);
+//                System.out.println(savePath);
                 //savePath = savePath.replace("\\build", "").trim();
                 //save
                 profile_pic.write(fileName);
@@ -92,9 +92,7 @@ public class UserManageServlet extends HttpServlet {
 
             case "/listUserServlet":
                 List<User> userList = userService.listUser();
-                System.out.println("hey list");
                 request.setAttribute("userList", userList);
-                System.out.println(userList);
                 request.getRequestDispatcher("userManagement.jsp").forward(request, response);
 
 //                HttpSession loginSession = request.getSession();
@@ -120,7 +118,7 @@ public class UserManageServlet extends HttpServlet {
             case "/delUserServlet":
                 HttpSession session = request.getSession();
                 User staff = (User) session.getAttribute("user");
-                System.out.println("hey cannot delete!" + staff);
+                
                 if (staff != null && "staff".equalsIgnoreCase(staff.getAccount_type())) {
 
                     response.setContentType("application/json");
@@ -129,15 +127,13 @@ public class UserManageServlet extends HttpServlet {
                     Gson gson = new Gson();
 
                     String jsonUser = gson.toJson(staff);
-                    System.out.println(staff);
-
+                   
                     PrintWriter out = response.getWriter();
                     out.print(jsonUser);
                     out.flush();
                 } else {
-                    System.out.println("heyyyo del");
+                    
                     String uname = request.getParameter("uname");
-                    System.out.println("GET uname =" + uname);
                     boolean b = userService.deleteUser(uname);
                     String tips = b ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
                             + "        <strong>" + uname + "</strong>&nbsp; has been deleted!&nbsp; <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
@@ -163,7 +159,7 @@ public class UserManageServlet extends HttpServlet {
                 Gson gson = new Gson();
 
                 String jsonUser = gson.toJson(user);
-                System.out.println(jsonUser);
+                
 
                 PrintWriter out = response.getWriter();
                 out.print(jsonUser);
@@ -176,7 +172,7 @@ public class UserManageServlet extends HttpServlet {
             case "/updateUserServlet":
                 HttpSession s = request.getSession();
                 User st = (User) s.getAttribute("user");
-                System.out.println("hey cannot update!" + st);
+                
                 if(st != null && "staff".equalsIgnoreCase(st.getAccount_type())){
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");

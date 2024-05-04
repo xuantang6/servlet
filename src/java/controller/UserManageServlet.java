@@ -22,7 +22,7 @@ import model.User;
 import services.LoginService;
 import services.UserService;
 
-@MultipartConfig(location = "C:/Users/tankl/Documents/NetBeansProjects/servlet/web/profile_picture/")
+@MultipartConfig(location = "D:/NetBeansProject/PracticalQuestion/ASGM/web/profile_picture/")
 public class UserManageServlet extends HttpServlet {
 
     @Override

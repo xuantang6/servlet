@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* 可根据需要调整表格在页面中的垂直位置 */
+    height: 100vh; 
     
 }
 
@@ -23,8 +23,6 @@ body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     
 }
-
-
 
 
 #main{
@@ -98,7 +96,7 @@ body{
 
 .content-box{
     padding: 20px;
-
+    height: auto;
 
 }
 .content-box p {

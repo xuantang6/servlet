@@ -111,6 +111,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+$('#staticBackdrop form').submit(function (event) {
+    // 遍历表单中的所有输入字段
+    var isValid = true;
+    $(this).find('input, select').each(function () {
+        // 检查是否有必填字段为空值
+        if ($(this).prop('required') && !$(this).val()) {
+            isValid = false;
+        }
+        // 检查是否有必选项未选择
+        if ($(this).is('select') && $(this).prop('required') && !$(this).val()) {
+            isValid = false;
+        }
+    });
+
+    // 如果有必填字段为空值或必选项未选择，则阻止表单提交
+    if (!isValid) {
+        event.preventDefault();
+        alert('Please fill in all required fields.');
+    }
+});
+
+
 $(document).ready(function () {
    
     $(".btndel").click(function () {
@@ -136,3 +158,26 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+   
+    $(".editButton").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "updateUserServlet",
+            success: function (response) {
+
+                if (response.account_type === 'staff') {
+                    $("#upBtn").prop("disabled", true);
+                    alert("You don't have permission to edit users.");
+                }
+
+                
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+});
+

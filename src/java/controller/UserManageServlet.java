@@ -22,7 +22,7 @@ import model.User;
 import services.LoginService;
 import services.UserService;
 
-@MultipartConfig(location = "D:/NetBeansProject/PracticalQuestion/test/web/profile_picture/")
+@MultipartConfig(location = "C:/Users/tankl/Documents/NetBeansProjects/servlet/web/profile_picture/")
 public class UserManageServlet extends HttpServlet {
 
     @Override
@@ -118,11 +118,9 @@ public class UserManageServlet extends HttpServlet {
                 break;
 
             case "/delUserServlet":
-                System.out.println("hi delete");
-
                 HttpSession session = request.getSession();
                 User staff = (User) session.getAttribute("user");
-                System.out.println("hey" + staff);
+                System.out.println("hey cannot delete!" + staff);
                 if (staff != null && "staff".equalsIgnoreCase(staff.getAccount_type())) {
 
                     response.setContentType("application/json");
@@ -176,28 +174,46 @@ public class UserManageServlet extends HttpServlet {
                 break;
 
             case "/updateUserServlet":
-                String usernameUp = request.getParameter("username");
-                String emailUp = request.getParameter("email");
-                String genderUp = request.getParameter("gender");
-                String contactUp = request.getParameter("contact");
-                String addressUp = request.getParameter("address");
-                String userTypeUp = request.getParameter("userType");
-                String accStatusUp = request.getParameter("accStatus");
-                String passwordUp = request.getParameter("password");
-                String imgPath = request.getParameter("imgPath");
+                HttpSession s = request.getSession();
+                User st = (User) s.getAttribute("user");
+                System.out.println("hey cannot update!" + st);
+                if(st != null && "staff".equalsIgnoreCase(st.getAccount_type())){
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
 
-                User userUp = new User(usernameUp, passwordUp, emailUp, genderUp, contactUp, addressUp, imgPath, userTypeUp, Boolean.parseBoolean(accStatusUp));
-                boolean bool = userService.updateUser(userUp);
+                    Gson gSon = new Gson();
 
-                String tips = bool ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
-                        + "        <strong>User information has been updated&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
-                        + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
-                        + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
+                    String jsUser = gSon.toJson(st);
+                    System.out.println(st);
+
+                    PrintWriter outt = response.getWriter();
+                    outt.print(jsUser);
+                    outt.flush();
+                }else{
+                    String usernameUp = request.getParameter("username");
+                    String emailUp = request.getParameter("email");
+                    String genderUp = request.getParameter("gender");
+                    String contactUp = request.getParameter("contact");
+                    String addressUp = request.getParameter("address");
+                    String userTypeUp = request.getParameter("userType");
+                    String accStatusUp = request.getParameter("accStatus");
+                    String passwordUp = request.getParameter("password");
+                    String imgPath = request.getParameter("imgPath");
+
+                    User userUp = new User(usernameUp, passwordUp, emailUp, genderUp, contactUp, addressUp, imgPath, userTypeUp, Boolean.parseBoolean(accStatusUp));
+                    boolean bool = userService.updateUser(userUp);
+
+                    String tips = bool ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
+                            + "        <strong>User information has been updated&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                            + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
+                            + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
 //                request.setAttribute("tips", tips);
 //                request.getRequestDispatcher("listUserServlet").forward(request, response);
-                request.getSession().setAttribute("tips", tips);
-                response.sendRedirect("listUserServlet");
+                    request.getSession().setAttribute("tips", tips);
+                    response.sendRedirect("listUserServlet");
 
+                }
+                
                 break;
 
             case "/checkUsernameServlet":

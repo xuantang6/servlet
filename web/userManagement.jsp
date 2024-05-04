@@ -32,7 +32,7 @@
                     <div class="box-8">
                         <div class="content-box">
                             <!-- Staff search form -->
-                            <form action="staff_search.php" method="POST">
+                            
                                 <p>Users
                                     <span style="cursor: pointer">
                                         <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -44,7 +44,7 @@
 
                                     <span><input type="text" placeholder="Search..." name="search" autocomplete="off" class="iptsearch"></span>
                                 </p>
-                            </form>
+                           
                             <br>
                             <div class="table-responsive" >
                                 <table>
@@ -260,7 +260,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" id="upBtn" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
@@ -269,27 +269,6 @@
         <script src="js/userManagement.js" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
- $('#staticBackdrop form').submit(function(event) {
-    // 遍历表单中的所有输入字段
-    var isValid = true;
-    $(this).find('input, select').each(function() {
-        // 检查是否有必填字段为空值
-        if ($(this).prop('required') && !$(this).val()) {
-            isValid = false;
-        }
-        // 检查是否有必选项未选择
-        if ($(this).is('select') && $(this).prop('required') && !$(this).val()) {
-            isValid = false;
-        }
-    });
-
-    // 如果有必填字段为空值或必选项未选择，则阻止表单提交
-    if (!isValid) {
-        event.preventDefault();
-        alert('Please fill in all required fields.');
-    }
-});
-
 
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

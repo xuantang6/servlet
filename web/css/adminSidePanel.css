@@ -47,7 +47,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .main-menu li {
     position:relative;
-    display:block;
     width:250px;
 }
 
@@ -108,7 +107,7 @@ nav {
     -moz-user-select:none;
     -ms-user-select:none;
     -o-user-select:none;
-    user-select:none;
+    -user-select:none;
 }
 
 nav ul,nav li {

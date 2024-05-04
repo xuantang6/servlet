@@ -9,10 +9,13 @@
         <link rel="stylesheet" href="css/adminSidePanel.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
         <title>Dashboard</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </head>
     <body>
-
-        <div class="area"></div><nav class="main-menu">
+        
+        <div class="area"></div>
+        <nav class="main-menu">
             <ul>
                 <li>
                     <a href="dashboard.jsp">
@@ -23,14 +26,13 @@
                     </a>
 
                 </li>
-                <li class="has-subnav">
+                <li id="userManage" class="has-subnav">
                     <a href="listUserServlet">
                         <i class="fa fa-user fa-2x"></i>
                         <span class="nav-text">
                             User Management
                         </span>
                     </a>
-
                 </li>
                 <li class="has-subnav">
                     <a href="#">
@@ -103,5 +105,12 @@
                 </li>  
             </ul>
         </nav>
+
+        <script>
+
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        
     </body>
 </html>

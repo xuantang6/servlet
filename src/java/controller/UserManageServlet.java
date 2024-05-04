@@ -24,14 +24,12 @@ import services.UserService;
 
 @MultipartConfig(location = "D:/NetBeansProject/PracticalQuestion/test/web/profile_picture/")
 public class UserManageServlet extends HttpServlet {
-    
-    
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request,response);
-        
+        doPost(request, response);
+
     }
 
     @Override
@@ -97,20 +95,39 @@ public class UserManageServlet extends HttpServlet {
                 System.out.println("hey list");
                 request.setAttribute("userList", userList);
                 System.out.println(userList);
-                request.getRequestDispatcher("userManagement.jsp").forward(request,response);
+                request.getRequestDispatcher("userManagement.jsp").forward(request, response);
+
+//                HttpSession loginSession = request.getSession();
+//                User loginUser = (User) loginSession.getAttribute("user");
+//                if(loginUser != null && "staff".equalsIgnoreCase(loginUser.getAccount_type())){
+//                    HttpSession session = request.getSession();
+//                    String accType = "staff";
+//                    session.setAttribute("userType", accType);
+//                    response.sendRedirect("dashboard.jsp");
+//                }else{
+//                    System.out.println("hey" + loginUser);
+//
+//                    List<User> userList = userService.listUser();
+//                    System.out.println("hey list");
+//                    request.setAttribute("userList", userList);
+//                    System.out.println(userList);
+//                    request.getRequestDispatcher("userManagement.jsp").forward(request, response); 
+//                }
+//                
+//                
                 break;
-                
+
             case "/delUserServlet":
                 System.out.println("hi delete");
-                
+
                 HttpSession session = request.getSession();
                 User staff = (User) session.getAttribute("user");
-                System.out.println("hey"+staff);
+                System.out.println("hey" + staff);
                 if (staff != null && "staff".equalsIgnoreCase(staff.getAccount_type())) {
-                    
+
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
-                    
+
                     Gson gson = new Gson();
 
                     String jsonUser = gson.toJson(staff);
@@ -119,13 +136,13 @@ public class UserManageServlet extends HttpServlet {
                     PrintWriter out = response.getWriter();
                     out.print(jsonUser);
                     out.flush();
-                } else{
+                } else {
                     System.out.println("heyyyo del");
                     String uname = request.getParameter("uname");
-                    System.out.println("GET uname ="+uname);
+                    System.out.println("GET uname =" + uname);
                     boolean b = userService.deleteUser(uname);
                     String tips = b ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
-                            + "        <strong>"+uname+"</strong>&nbsp; has been deleted!&nbsp; <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
+                            + "        <strong>" + uname + "</strong>&nbsp; has been deleted!&nbsp; <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
                             + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
                             + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
 //                    request.setAttribute("tips", tips);
@@ -135,9 +152,9 @@ public class UserManageServlet extends HttpServlet {
                     System.out.println("staff");
                     //use session to pass error msg else cant redirect
                 }
-                
+
                 break;
-                
+
             case "/queryUserServlet":
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
@@ -151,13 +168,13 @@ public class UserManageServlet extends HttpServlet {
                 System.out.println(jsonUser);
 
                 PrintWriter out = response.getWriter();
-                out.print(jsonUser); 
+                out.print(jsonUser);
                 out.flush();
 
-                System.out.println("Received username: " + uName); 
-        
+                System.out.println("Received username: " + uName);
+
                 break;
-                
+
             case "/updateUserServlet":
                 String usernameUp = request.getParameter("username");
                 String emailUp = request.getParameter("email");
@@ -168,10 +185,10 @@ public class UserManageServlet extends HttpServlet {
                 String accStatusUp = request.getParameter("accStatus");
                 String passwordUp = request.getParameter("password");
                 String imgPath = request.getParameter("imgPath");
-                
-                User userUp = new User(usernameUp, passwordUp ,emailUp, genderUp, contactUp, addressUp, imgPath, userTypeUp, Boolean.parseBoolean(accStatusUp));
+
+                User userUp = new User(usernameUp, passwordUp, emailUp, genderUp, contactUp, addressUp, imgPath, userTypeUp, Boolean.parseBoolean(accStatusUp));
                 boolean bool = userService.updateUser(userUp);
-                
+
                 String tips = bool ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"
                         + "        <strong>User information has been updated&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
                         + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
@@ -182,22 +199,20 @@ public class UserManageServlet extends HttpServlet {
                 response.sendRedirect("listUserServlet");
 
                 break;
-                
-                
+
             case "/checkUsernameServlet":
                 String signUpUname = request.getParameter("signup-username");
-                
+
                 UserService uService = new UserService();
                 User checkUser = uService.getUserByUsername(signUpUname);
 
                 if (checkUser == null) {
                     response.getWriter().write("Username exists");
-                }else{
-                     response.getWriter().write("Username does not exist");
+                } else {
+                    response.getWriter().write("Username does not exist");
                 }
                 break;
-                
-                
+
             default:
                 System.out.println("hi");
         }

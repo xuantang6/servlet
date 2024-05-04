@@ -128,12 +128,12 @@
                         <div class="modal-body" style="height: 72vh; overflow-y: auto;">
                             <div class="form-group mb-3">
                                 <label for="">Username</label>
-                                <input type="text" class="form-control" placeholder="Username" name="username" id="">
+                                <input type="text" class="form-control" placeholder="Username" name="username" id="" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Email</label>
-                                <input type="email" class="form-control" placeholder="Email" name="email" id="">
+                                <input type="email" class="form-control" placeholder="Email" name="email" id="" autocomplete="off">
                             </div>
 
                             <label for="">Gender</label>
@@ -145,12 +145,12 @@
 
                             <div class="form-group mb-3">
                                 <label for="">Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Contact" name="contact" id="">
+                                <input type="text" class="form-control" placeholder="Contact" name="contact" id="" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Home Address</label>
-                                <input type="text" class="form-control" placeholder="Address" name="address" id="">
+                                <input type="text" class="form-control" placeholder="Address" name="address" id="" autocomplete="off">
                             </div>
 
                             <label for="">Avatar Image</label>

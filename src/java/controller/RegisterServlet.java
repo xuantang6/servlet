@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("signup-password");
 
         if (username != null && email != null && password != null) {
-            User user = new User(username, password, email, "M", "", "", "", "Customer", true);
+            User user = new User(username, password, email, "M", "", "", "", "customer", true);
             UserService userService = new UserService();
             boolean b = userService.addUser(user);
 

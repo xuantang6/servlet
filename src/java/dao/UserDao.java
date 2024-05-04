@@ -109,15 +109,15 @@ public class UserDao {
         boolean success = false;
         try (Connection connection = dbDao.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE account SET password=?, email=?, gender=?, contact_no=?, address=?, profile_pic=?, account_type=?, status=? WHERE username=?")) {
 
-            preparedStatement.setString(1, user.getPassword());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getGender());
-            preparedStatement.setString(4, user.getContact_no());
-            preparedStatement.setString(5, user.getAddress());
-            preparedStatement.setString(6, user.getProfile_pic());
-            preparedStatement.setString(7, user.getAccount_type());
+            preparedStatement.setString(1, user.getPassword().trim());
+            preparedStatement.setString(2, user.getEmail().trim());
+            preparedStatement.setString(3, user.getGender().trim());
+            preparedStatement.setString(4, user.getContact_no().trim());
+            preparedStatement.setString(5, user.getAddress().trim());
+            preparedStatement.setString(6, user.getProfile_pic().trim());
+            preparedStatement.setString(7, user.getAccount_type().trim());
             preparedStatement.setBoolean(8, user.isStatus());
-            preparedStatement.setString(9, user.getUsername());
+            preparedStatement.setString(9, user.getUsername().trim());
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {

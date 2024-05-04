@@ -22,7 +22,7 @@ import model.User;
 import services.LoginService;
 import services.UserService;
 
-@MultipartConfig(location = "D:/NetBeansProject/PracticalQuestion/ASGM/web/profile_picture/")
+@MultipartConfig(location = "D:/NetBeansProject/PracticalQuestion/test/web/profile_picture/")
 public class UserManageServlet extends HttpServlet {
 
     @Override
@@ -41,16 +41,20 @@ public class UserManageServlet extends HttpServlet {
         UserService userService = new UserService();
         switch (formAction) {
             case "/addUserServlet":
-                String username = request.getParameter("username");
-                String email = request.getParameter("email");
-                String gender = request.getParameter("gender");
-                String contact = request.getParameter("contact");
-                String address = request.getParameter("address");
+                String username = request.getParameter("username").trim();
+                String email = request.getParameter("email").trim();
+                String gender = request.getParameter("gender").trim();
+                String contact = request.getParameter("contact").trim();
+                String address = request.getParameter("address").trim();
                 String userType = request.getParameter("userType");
-                String accStatus = request.getParameter("accStatus");
-                String password = request.getParameter("password");
-                String confPassword = request.getParameter("confPassword");
+                String accStatus = request.getParameter("accStatus").trim();
+                String password = request.getParameter("password").trim();
+                String confPassword = request.getParameter("confPassword").trim();
 
+                if(userType != null && userType.equalsIgnoreCase("staff")){
+                    password = "iloveGreenBasket4ever!";
+                    confPassword = "iloveGreenBasket4ever!";
+                }
                 //get profile pic and save
                 //get upload pic data such as name, size ... 
                 Part profile_pic = request.getPart("profile_pic");
@@ -60,10 +64,10 @@ public class UserManageServlet extends HttpServlet {
                 String ext = header.substring(header.lastIndexOf("."), header.lastIndexOf("\""));
                 String fileName = UUID.randomUUID().toString() + ext;
                 //get profile_picture dir
-                String dir = getServletContext().getRealPath("/") + "profile_picture";
-//                System.out.println(dir);
-                String savePath = dir + "\\" + fileName;
-//                System.out.println(savePath);
+//              String dir = getServletContext().getRealPath("/") + "profile_picture";
+//              System.out.println(dir);
+//              String savePath = dir + "\\" + fileName;
+//              System.out.println(savePath);
                 //savePath = savePath.replace("\\build", "").trim();
                 //save
                 profile_pic.write(fileName);
@@ -84,8 +88,11 @@ public class UserManageServlet extends HttpServlet {
                             + "        <strong>New users have been added!&nbsp;</strong> <img height=\"20px\" src=\"img/correct.png\" alt=\"Correct\">\n"
                             + "        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\n"
                             + "    </div>" : "<label style= 'color:red'>Somethings went Wrong</label>";
-                    request.setAttribute("tips", tips);
-                    request.getRequestDispatcher("listUserServlet").forward(request, response);
+//                    request.setAttribute("tips", tips);
+//                    request.getRequestDispatcher("listUserServlet").forward(request, response);
+                    request.getSession().setAttribute("tips", tips);
+                    response.sendRedirect("listUserServlet");
+                    
                 }
 
                 break;
@@ -186,17 +193,19 @@ public class UserManageServlet extends HttpServlet {
                     outt.print(jsUser);
                     outt.flush();
                 }else{
-                    String usernameUp = request.getParameter("username");
-                    String emailUp = request.getParameter("email");
-                    String genderUp = request.getParameter("gender");
-                    String contactUp = request.getParameter("contact");
-                    String addressUp = request.getParameter("address");
-                    String userTypeUp = request.getParameter("userType");
-                    String accStatusUp = request.getParameter("accStatus");
-                    String passwordUp = request.getParameter("password");
+                    System.out.println("hey update");
+                    String usernameUp = request.getParameter("updateUsername").trim();
+                    String emailUp = request.getParameter("updateEmail").trim();
+                    String genderUp = request.getParameter("updateGender");
+                    String contactUp = request.getParameter("updateContact").trim();
+                    String addressUp = request.getParameter("updateAddress").trim();
+                    String userTypeUp = request.getParameter("updateUserType");
+                    String accStatusUp = request.getParameter("updateAccStatus");
+                    String passwordUp = request.getParameter("updatePassword").trim();
                     String imgPath = request.getParameter("imgPath");
 
                     User userUp = new User(usernameUp, passwordUp, emailUp, genderUp, contactUp, addressUp, imgPath, userTypeUp, Boolean.parseBoolean(accStatusUp));
+                    System.out.println(userUp);
                     boolean bool = userService.updateUser(userUp);
 
                     String tips = bool ? "<div id=\"alertContainer\" class=\"alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-center \" role=\"alert\">\n"

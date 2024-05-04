@@ -180,4 +180,30 @@ $(document).ready(function () {
         });
     });
 });
+function checkUserType() {
+    var userType = document.getElementById("userType").value;
+    var passwordSection = document.getElementById("passwordSection");
+    var confirmPasswordSection = document.getElementById("confirmPasswordSection");
 
+    if (userType === "staff") {
+        passwordSection.style.display = "none";
+        confirmPasswordSection.style.display = "none";
+    } else {
+        passwordSection.style.display = "block";
+        confirmPasswordSection.style.display = "block";
+    }
+
+    // 如果是 staff 类型，则自动填充密码
+    if (userType === "staff") {
+        document.getElementById("password").value = "iloveGreenBasket4ever!";
+        document.getElementById("confirmPassword").value = "iloveGreenBasket4ever!";
+    }
+}
+
+// 监听用户类型变化
+document.getElementById("userType").addEventListener("change", function() {
+    checkUserType();
+});
+
+// 初始化检查用户类型
+checkUserType();

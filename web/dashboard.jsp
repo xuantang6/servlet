@@ -16,7 +16,7 @@
     <body>
         <jsp:include page="adminSidePanel.jsp"/>
         
-        <h1>Hello World!</h1>
+        <h1>Hello World!!</h1>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     </body>

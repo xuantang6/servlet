@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="css/userManagement.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <title>JSP Page</title>
+        <style>
+            
+        </style>
     </head>
     <body style="background-color: #999;" >
         <jsp:include page="adminSidePanel.jsp"/>
@@ -128,12 +131,12 @@
                         <div class="modal-body" style="height: 72vh; overflow-y: auto;">
                             <div class="form-group mb-3">
                                 <label for="">Username</label>
-                                <input type="text" class="form-control" placeholder="Username" name="username" id="">
+                                <input type="text" class="form-control" placeholder="Username" name="username" id="" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Email</label>
-                                <input type="email" class="form-control" placeholder="Email" name="email" id="">
+                                <input type="email" class="form-control" placeholder="Email" name="email" id="" autocomplete="off">
                             </div>
 
                             <label for="">Gender</label>
@@ -145,12 +148,12 @@
 
                             <div class="form-group mb-3">
                                 <label for="">Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Contact" name="contact" id="">
+                                <input type="text" class="form-control" placeholder="Contact" name="contact" id="" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Home Address</label>
-                                <input type="text" class="form-control" placeholder="Address" name="address" id="">
+                                <input type="text" class="form-control" placeholder="Address" name="address" id="" autocomplete="off">
                             </div>
 
                             <label for="">Avatar Image</label>
@@ -160,7 +163,7 @@
                             </div>
 
                             <label for="">User Type</label>
-                            <select class="form-select mb-3" name="userType" aria-label="Default select example" required>
+                            <select class="form-select mb-3" name="userType" aria-label="Default select example" onchange="checkUserType()" id="userType" required>
                                 <option hidden disabled selected>Select User Type</option>
                                 <option value="staff">Staff</option>
                                 <option value="customer">Customer</option>
@@ -173,14 +176,14 @@
                                 <option value="false">Inactive</option>
                             </select>
 
-                            <div class="form-group mb-3">
+                            <div id="passwordSection" class="form-group mb-3 password">
                                 <label for="">Password</label>
-                                <input type="password" class="form-control" placeholder="Password" name="password" id="">
+                                <input type="password" class="form-control" placeholder="Password" name="password" id="password">
                             </div>
 
-                            <div class="form-group mb-3">
+                            <div id="confirmPasswordSection" class="form-group mb-3 password">
                                 <label for="">Confirm Password</label>
-                                <input type="password" class="form-control" placeholder="Confirm Password" name="confPassword" id="">
+                                <input type="password" class="form-control" placeholder="Confirm Password" name="confPassword" id="confirmPassword">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -205,16 +208,16 @@
                         <div class="modal-body" style="height: 72vh; overflow-y: auto;">
                             <div class="form-group mb-3">
                                 <label for="">Username</label>
-                                <input type="text" class="form-control" placeholder="Username" id="updateUsername" value="" name="username">
+                                <input type="text" class="form-control" placeholder="Username" id="updateUsername" value="" name="updateUsername">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Email</label>
-                                <input type="email" class="form-control" placeholder="Email" name="email" id="updateEmail">
+                                <input type="email" class="form-control" placeholder="Email" name="updateEmail" id="updateEmail">
                             </div>
 
                             <label for="">Gender</label>
-                            <select class="form-select mb-3" name="gender" id="updateGender" aria-label="Default select example">
+                            <select class="form-select mb-3" name="updateGender" id="updateGender" aria-label="Default select example">
                                 <option hidden disabled >Select Gender</option>
                                 <option value="M">Male</option>
                                 <option id="femaleOpt" value="F">Female</option>
@@ -222,12 +225,12 @@
 
                             <div class="form-group mb-3">
                                 <label for="">Contact Number</label>
-                                <input value="" type="text" value="" class="form-control" placeholder="Contact" name="contact" id="updateContact">
+                                <input value="" type="text" value="" class="form-control" placeholder="Contact" name="updateContact" id="updateContact">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Home Address</label>
-                                <input value="" type="text" value="" class="form-control" placeholder="Address" name="address" id="updateAddress">
+                                <input value="" type="text" value="" class="form-control" placeholder="Address" name="updateAddress" id="updateAddress">
                             </div>
 
                             <label for="">Avatar Image</label>
@@ -239,7 +242,7 @@
                             </div>
 
                             <label for="">User Type</label>
-                            <select class="form-select mb-3" name="userType" aria-label="Default select example" required>
+                            <select class="form-select mb-3" name="updateUserType" aria-label="Default select example" required>
                                 <option hidden disabled>Select User Type</option>
                                 <option value="staff">Staff</option>
                                 <option id="custOpt" value="customer">Customer</option>
@@ -247,7 +250,7 @@
 
 
                             <label for="">Account Status</label>
-                            <select class="form-select mb-3" name="accStatus" aria-label="Default select example">
+                            <select class="form-select mb-3" name="updateAccStatus" aria-label="Default select example">
                                 <option hidden disabled>Select Account Status</option>
                                 <option value="true">Active</option>
                                 <option id="inactiveOpt" value="false">Inactive</option>
@@ -255,7 +258,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="">Password</label>
-                                <input value="" type="password" class="form-control" placeholder="Password" name="password" id="updatePassword">
+                                <input value="" type="password" class="form-control" placeholder="Password" name="updatePassword" id="updatePassword">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -268,9 +271,11 @@
         </div>
         <script src="js/userManagement.js" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        
         <script>
-
+            
         </script>
+       
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
     </body>

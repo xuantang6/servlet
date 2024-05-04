@@ -32,6 +32,7 @@ public class LogOutServlet extends HttpServlet {
          HttpSession session = request.getSession();
          session.removeAttribute("userType");
          response.sendRedirect("signUpIn.jsp");
+         System.out.println("hello ");
     }
 
 }
